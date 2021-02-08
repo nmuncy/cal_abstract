@@ -61,8 +61,8 @@ def main():
 
         # randomly assign fixed mapping
         coin_toss = randrange(2)
-        corr_A = "Left" if coin_toss == 1 else "Right"
-        corr_B = "Left" if corr_A == "Right" else "Right"
+        corr_A = "left" if coin_toss == 1 else "right"
+        corr_B = "left" if corr_A == "right" else "right"
 
         # set up block dictionary
         #   pull random stim of length = block_length
@@ -136,7 +136,7 @@ def main():
         for ind in range(0, df_rand.shape[0]):
             if df_rand.at[ind, "Corr"] == "Cond":
                 old_val = df_rand.at[ind - 1, "Corr"]
-                df_rand.at[ind, "Corr"] = "Left" if old_val == "Right" else "Right"
+                df_rand.at[ind, "Corr"] = "left" if old_val == "right" else "right"
 
         # write df_rand to csv
         df_rand.to_csv(os.path.join(block_dir, f"{block}.csv"), index=False)
