@@ -12,6 +12,9 @@ Assumes dimensional stimuli are called "foo_low" and "foo_high"
 Assumes stimuli are found in ../Stimuli/foo, will write to ../blocks/BlockX.csv
 
 Update: dropped "Dim" from task
+
+TODO randomize Fix/Cond assignment for each subject
+    only for running locally in psychopy
 """
 # %%
 import os
@@ -32,12 +35,31 @@ def main():
         stimuli will be used for fixed mapping in block1.
         Also, stimuli will be located in stim_dir/School
     """
-    block_length = 10
+    block_length = 50
+
+    # cat_list = [
+    #     "Dangerous",
+    #     "Healthy",
+    #     "Old",
+    #     "Sad",
+    #     "School",
+    #     "Small",
+    #     "Smell",
+    #     "Soft",
+    #     "Wealth",
+    # ]
+    # cat_rand = random.sample(cat_list, len(cat_list))
+
+    # stim_dict = {
+    #     "Block1": {"Fix1": cat_rand[0], "Fix2": cat_rand[1], "Cond": cat_rand[2]},
+    #     "Block2": {"Fix1": cat_rand[3], "Fix2": cat_rand[4], "Cond": cat_rand[5]},
+    #     "Block3": {"Fix1": cat_rand[6], "Fix2": cat_rand[7], "Cond": cat_rand[8]},
+    # }
 
     stim_dict = {
         "Block1": {"Fix1": "School", "Fix2": "Dangerous", "Cond": "Small"},
         "Block2": {"Fix1": "Old", "Fix2": "Healthy", "Cond": "Wealth"},
-        "Block3": {"Fix1": "Sad", "Fix2": "Temperature", "Cond": "Smell"},
+        "Block3": {"Fix1": "Sad", "Fix2": "Soft", "Cond": "Smell"},
     }
 
     # set paths

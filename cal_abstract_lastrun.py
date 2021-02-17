@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2020.2.4),
-    on Wed Feb 17 17:22:11 2021
+    on Wed Feb 17 18:56:34 2021
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -85,17 +85,24 @@ WelcomeClock = core.Clock()
 welcome_text1 = visual.TextStim(win=win, name='welcome_text1',
     text='Welcome to the Experiment!',
     font='Arial',
-    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    pos=(0, 0.3), height=0.1, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 welcome_text2 = visual.TextStim(win=win, name='welcome_text2',
-    text='Press “enter” or “return” to continue.',
+    text='We appreciate your participation.',
     font='Arial',
-    pos=(0, -0.35), height=0.035, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
+welcome_text3 = visual.TextStim(win=win, name='welcome_text3',
+    text='Press “enter” or “return” to continue.',
+    font='Arial',
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=-2.0);
 welcome_resp = keyboard.Keyboard()
 
 # Initialize components for Routine "Instructions"
@@ -103,14 +110,14 @@ InstructionsClock = core.Clock()
 instruct_text1 = visual.TextStim(win=win, name='instruct_text1',
     text='default text',
     font='Arial',
-    pos=(0, 0.2), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, 0.15), height=0.05, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
 instruct_text2 = visual.TextStim(win=win, name='instruct_text2',
     text='Press “enter” or “return” to continue.',
     font='Arial',
-    pos=(0, -0.35), height=0.035, wrapWidth=None, ori=0, 
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
@@ -119,12 +126,19 @@ instruct_resp1 = keyboard.Keyboard()
 # Initialize components for Routine "Start1"
 Start1Clock = core.Clock()
 start_text1 = visual.TextStim(win=win, name='start_text1',
-    text='Starting Block 1.\n\nPress “enter” or “return” to continue.',
+    text='Starting Block 1.',
     font='Arial',
-    pos=(0, 0), height=0.035, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
+start_text2 = visual.TextStim(win=win, name='start_text2',
+    text='Press “s” to start the block.',
+    font='Arial',
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=-1.0);
 start_resp1 = keyboard.Keyboard()
 
 # Initialize components for Routine "Block1"
@@ -133,14 +147,14 @@ image1 = visual.ImageStim(
     win=win,
     name='image1', 
     image='sin', mask=None,
-    ori=0, pos=(0, 0), size=(0.5, 0.5),
+    ori=0, pos=(0, 0), size=None,
     color=[1,1,1], colorSpace='rgb', opacity=1,
     flipHoriz=False, flipVert=False,
     texRes=512, interpolate=True, depth=0.0)
 text1 = visual.TextStim(win=win, name='text1',
-    text='<- or ->',
+    text='<-  or  ->',
     font='Arial',
-    pos=(0, -0.35), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
@@ -169,13 +183,20 @@ break_resp1 = keyboard.Keyboard()
 
 # Initialize components for Routine "Start2"
 Start2Clock = core.Clock()
-start_text2 = visual.TextStim(win=win, name='start_text2',
-    text='Starting Block 2.\n\nPress “enter” or “return” to continue.',
+start_text3 = visual.TextStim(win=win, name='start_text3',
+    text='Starting Block 2.',
     font='Arial',
-    pos=(0, 0), height=0.035, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
+start_text4 = visual.TextStim(win=win, name='start_text4',
+    text='Press “s” to start the block.',
+    font='Arial',
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=-1.0);
 start_resp2 = keyboard.Keyboard()
 
 # Initialize components for Routine "Block2"
@@ -184,14 +205,14 @@ image2 = visual.ImageStim(
     win=win,
     name='image2', 
     image='sin', mask=None,
-    ori=0, pos=(0, 0), size=(0.5, 0.5),
+    ori=0, pos=(0, 0), size=None,
     color=[1,1,1], colorSpace='rgb', opacity=1,
     flipHoriz=False, flipVert=False,
     texRes=512, interpolate=True, depth=0.0)
 text2 = visual.TextStim(win=win, name='text2',
-    text='<- or ->',
+    text='<-  or  ->',
     font='Arial',
-    pos=(0, -0.35), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
@@ -220,13 +241,20 @@ break_resp2 = keyboard.Keyboard()
 
 # Initialize components for Routine "Start3"
 Start3Clock = core.Clock()
-start_text3 = visual.TextStim(win=win, name='start_text3',
-    text='Starting Block 3.\n\nPress “enter” or “return” to continue.',
+start_text5 = visual.TextStim(win=win, name='start_text5',
+    text='Starting Block 3.',
     font='Arial',
-    pos=(0, 0), height=0.035, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
+start_text6 = visual.TextStim(win=win, name='start_text6',
+    text='Press “s” to start the block.',
+    font='Arial',
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=-1.0);
 start_resp3 = keyboard.Keyboard()
 
 # Initialize components for Routine "Block3"
@@ -235,14 +263,14 @@ image3 = visual.ImageStim(
     win=win,
     name='image3', 
     image='sin', mask=None,
-    ori=0, pos=(0, 0), size=(0.5, 0.5),
+    ori=0, pos=(0, 0), size=None,
     color=[1,1,1], colorSpace='rgb', opacity=1,
     flipHoriz=False, flipVert=False,
     texRes=512, interpolate=True, depth=0.0)
 text3 = visual.TextStim(win=win, name='text3',
-    text='<- or ->',
+    text='<-  or  ->',
     font='Arial',
-    pos=(0, -0.35), height=0.05, wrapWidth=None, ori=0, 
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
@@ -260,13 +288,20 @@ feedback_text3 = visual.TextStim(win=win, name='feedback_text3',
 
 # Initialize components for Routine "End"
 EndClock = core.Clock()
-end_text = visual.TextStim(win=win, name='end_text',
-    text='You have finished the experiment!\n\nPress “e” to exit.',
+end_text1 = visual.TextStim(win=win, name='end_text1',
+    text='You have finished the experiment!',
     font='Arial',
-    pos=(0, 0), height=0.035, wrapWidth=None, ori=0, 
+    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=0.0);
+end_text2 = visual.TextStim(win=win, name='end_text2',
+    text='Press “e” to exit.',
+    font='Arial',
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=-1.0);
 end_resp = keyboard.Keyboard()
 
 # Create some handy timers
@@ -280,7 +315,7 @@ welcome_resp.keys = []
 welcome_resp.rt = []
 _welcome_resp_allKeys = []
 # keep track of which components have finished
-WelcomeComponents = [welcome_text1, welcome_text2, welcome_resp]
+WelcomeComponents = [welcome_text1, welcome_text2, welcome_text3, welcome_resp]
 for thisComponent in WelcomeComponents:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -320,6 +355,15 @@ while continueRoutine:
         welcome_text2.tStartRefresh = tThisFlipGlobal  # on global time
         win.timeOnFlip(welcome_text2, 'tStartRefresh')  # time at next scr refresh
         welcome_text2.setAutoDraw(True)
+    
+    # *welcome_text3* updates
+    if welcome_text3.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        welcome_text3.frameNStart = frameN  # exact frame index
+        welcome_text3.tStart = t  # local t and not account for scr refresh
+        welcome_text3.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(welcome_text3, 'tStartRefresh')  # time at next scr refresh
+        welcome_text3.setAutoDraw(True)
     
     # *welcome_resp* updates
     waitOnFlip = False
@@ -368,6 +412,8 @@ thisExp.addData('welcome_text1.started', welcome_text1.tStartRefresh)
 thisExp.addData('welcome_text1.stopped', welcome_text1.tStopRefresh)
 thisExp.addData('welcome_text2.started', welcome_text2.tStartRefresh)
 thisExp.addData('welcome_text2.stopped', welcome_text2.tStopRefresh)
+thisExp.addData('welcome_text3.started', welcome_text3.tStartRefresh)
+thisExp.addData('welcome_text3.stopped', welcome_text3.tStopRefresh)
 # check responses
 if welcome_resp.keys in ['', [], None]:  # No response was made
     welcome_resp.keys = None
@@ -517,7 +563,7 @@ start_resp1.keys = []
 start_resp1.rt = []
 _start_resp1_allKeys = []
 # keep track of which components have finished
-Start1Components = [start_text1, start_resp1]
+Start1Components = [start_text1, start_text2, start_resp1]
 for thisComponent in Start1Components:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -549,6 +595,15 @@ while continueRoutine:
         win.timeOnFlip(start_text1, 'tStartRefresh')  # time at next scr refresh
         start_text1.setAutoDraw(True)
     
+    # *start_text2* updates
+    if start_text2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        start_text2.frameNStart = frameN  # exact frame index
+        start_text2.tStart = t  # local t and not account for scr refresh
+        start_text2.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(start_text2, 'tStartRefresh')  # time at next scr refresh
+        start_text2.setAutoDraw(True)
+    
     # *start_resp1* updates
     waitOnFlip = False
     if start_resp1.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
@@ -563,7 +618,7 @@ while continueRoutine:
         win.callOnFlip(start_resp1.clock.reset)  # t=0 on next screen flip
         win.callOnFlip(start_resp1.clearEvents, eventType='keyboard')  # clear events on next screen flip
     if start_resp1.status == STARTED and not waitOnFlip:
-        theseKeys = start_resp1.getKeys(keyList=['return'], waitRelease=False)
+        theseKeys = start_resp1.getKeys(keyList=['s'], waitRelease=False)
         _start_resp1_allKeys.extend(theseKeys)
         if len(_start_resp1_allKeys):
             start_resp1.keys = _start_resp1_allKeys[-1].name  # just the last key pressed
@@ -594,6 +649,8 @@ for thisComponent in Start1Components:
         thisComponent.setAutoDraw(False)
 thisExp.addData('start_text1.started', start_text1.tStartRefresh)
 thisExp.addData('start_text1.stopped', start_text1.tStopRefresh)
+thisExp.addData('start_text2.started', start_text2.tStartRefresh)
+thisExp.addData('start_text2.stopped', start_text2.tStopRefresh)
 # check responses
 if start_resp1.keys in ['', [], None]:  # No response was made
     start_resp1.keys = None
@@ -929,7 +986,7 @@ start_resp2.keys = []
 start_resp2.rt = []
 _start_resp2_allKeys = []
 # keep track of which components have finished
-Start2Components = [start_text2, start_resp2]
+Start2Components = [start_text3, start_text4, start_resp2]
 for thisComponent in Start2Components:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -952,14 +1009,23 @@ while continueRoutine:
     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
     # update/draw components on each frame
     
-    # *start_text2* updates
-    if start_text2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+    # *start_text3* updates
+    if start_text3.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
         # keep track of start time/frame for later
-        start_text2.frameNStart = frameN  # exact frame index
-        start_text2.tStart = t  # local t and not account for scr refresh
-        start_text2.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(start_text2, 'tStartRefresh')  # time at next scr refresh
-        start_text2.setAutoDraw(True)
+        start_text3.frameNStart = frameN  # exact frame index
+        start_text3.tStart = t  # local t and not account for scr refresh
+        start_text3.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(start_text3, 'tStartRefresh')  # time at next scr refresh
+        start_text3.setAutoDraw(True)
+    
+    # *start_text4* updates
+    if start_text4.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        start_text4.frameNStart = frameN  # exact frame index
+        start_text4.tStart = t  # local t and not account for scr refresh
+        start_text4.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(start_text4, 'tStartRefresh')  # time at next scr refresh
+        start_text4.setAutoDraw(True)
     
     # *start_resp2* updates
     waitOnFlip = False
@@ -975,7 +1041,7 @@ while continueRoutine:
         win.callOnFlip(start_resp2.clock.reset)  # t=0 on next screen flip
         win.callOnFlip(start_resp2.clearEvents, eventType='keyboard')  # clear events on next screen flip
     if start_resp2.status == STARTED and not waitOnFlip:
-        theseKeys = start_resp2.getKeys(keyList=['return'], waitRelease=False)
+        theseKeys = start_resp2.getKeys(keyList=['s'], waitRelease=False)
         _start_resp2_allKeys.extend(theseKeys)
         if len(_start_resp2_allKeys):
             start_resp2.keys = _start_resp2_allKeys[-1].name  # just the last key pressed
@@ -1004,8 +1070,10 @@ while continueRoutine:
 for thisComponent in Start2Components:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-thisExp.addData('start_text2.started', start_text2.tStartRefresh)
-thisExp.addData('start_text2.stopped', start_text2.tStopRefresh)
+thisExp.addData('start_text3.started', start_text3.tStartRefresh)
+thisExp.addData('start_text3.stopped', start_text3.tStopRefresh)
+thisExp.addData('start_text4.started', start_text4.tStartRefresh)
+thisExp.addData('start_text4.stopped', start_text4.tStopRefresh)
 # check responses
 if start_resp2.keys in ['', [], None]:  # No response was made
     start_resp2.keys = None
@@ -1341,7 +1409,7 @@ start_resp3.keys = []
 start_resp3.rt = []
 _start_resp3_allKeys = []
 # keep track of which components have finished
-Start3Components = [start_text3, start_resp3]
+Start3Components = [start_text5, start_text6, start_resp3]
 for thisComponent in Start3Components:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -1364,14 +1432,23 @@ while continueRoutine:
     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
     # update/draw components on each frame
     
-    # *start_text3* updates
-    if start_text3.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+    # *start_text5* updates
+    if start_text5.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
         # keep track of start time/frame for later
-        start_text3.frameNStart = frameN  # exact frame index
-        start_text3.tStart = t  # local t and not account for scr refresh
-        start_text3.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(start_text3, 'tStartRefresh')  # time at next scr refresh
-        start_text3.setAutoDraw(True)
+        start_text5.frameNStart = frameN  # exact frame index
+        start_text5.tStart = t  # local t and not account for scr refresh
+        start_text5.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(start_text5, 'tStartRefresh')  # time at next scr refresh
+        start_text5.setAutoDraw(True)
+    
+    # *start_text6* updates
+    if start_text6.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        start_text6.frameNStart = frameN  # exact frame index
+        start_text6.tStart = t  # local t and not account for scr refresh
+        start_text6.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(start_text6, 'tStartRefresh')  # time at next scr refresh
+        start_text6.setAutoDraw(True)
     
     # *start_resp3* updates
     waitOnFlip = False
@@ -1387,7 +1464,7 @@ while continueRoutine:
         win.callOnFlip(start_resp3.clock.reset)  # t=0 on next screen flip
         win.callOnFlip(start_resp3.clearEvents, eventType='keyboard')  # clear events on next screen flip
     if start_resp3.status == STARTED and not waitOnFlip:
-        theseKeys = start_resp3.getKeys(keyList=['return'], waitRelease=False)
+        theseKeys = start_resp3.getKeys(keyList=['s'], waitRelease=False)
         _start_resp3_allKeys.extend(theseKeys)
         if len(_start_resp3_allKeys):
             start_resp3.keys = _start_resp3_allKeys[-1].name  # just the last key pressed
@@ -1416,8 +1493,10 @@ while continueRoutine:
 for thisComponent in Start3Components:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-thisExp.addData('start_text3.started', start_text3.tStartRefresh)
-thisExp.addData('start_text3.stopped', start_text3.tStopRefresh)
+thisExp.addData('start_text5.started', start_text5.tStartRefresh)
+thisExp.addData('start_text5.stopped', start_text5.tStopRefresh)
+thisExp.addData('start_text6.started', start_text6.tStartRefresh)
+thisExp.addData('start_text6.stopped', start_text6.tStopRefresh)
 # check responses
 if start_resp3.keys in ['', [], None]:  # No response was made
     start_resp3.keys = None
@@ -1657,7 +1736,7 @@ end_resp.keys = []
 end_resp.rt = []
 _end_resp_allKeys = []
 # keep track of which components have finished
-EndComponents = [end_text, end_resp]
+EndComponents = [end_text1, end_text2, end_resp]
 for thisComponent in EndComponents:
     thisComponent.tStart = None
     thisComponent.tStop = None
@@ -1680,14 +1759,23 @@ while continueRoutine:
     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
     # update/draw components on each frame
     
-    # *end_text* updates
-    if end_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+    # *end_text1* updates
+    if end_text1.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
         # keep track of start time/frame for later
-        end_text.frameNStart = frameN  # exact frame index
-        end_text.tStart = t  # local t and not account for scr refresh
-        end_text.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(end_text, 'tStartRefresh')  # time at next scr refresh
-        end_text.setAutoDraw(True)
+        end_text1.frameNStart = frameN  # exact frame index
+        end_text1.tStart = t  # local t and not account for scr refresh
+        end_text1.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(end_text1, 'tStartRefresh')  # time at next scr refresh
+        end_text1.setAutoDraw(True)
+    
+    # *end_text2* updates
+    if end_text2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        end_text2.frameNStart = frameN  # exact frame index
+        end_text2.tStart = t  # local t and not account for scr refresh
+        end_text2.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(end_text2, 'tStartRefresh')  # time at next scr refresh
+        end_text2.setAutoDraw(True)
     
     # *end_resp* updates
     waitOnFlip = False
@@ -1732,8 +1820,10 @@ while continueRoutine:
 for thisComponent in EndComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-thisExp.addData('end_text.started', end_text.tStartRefresh)
-thisExp.addData('end_text.stopped', end_text.tStopRefresh)
+thisExp.addData('end_text1.started', end_text1.tStartRefresh)
+thisExp.addData('end_text1.stopped', end_text1.tStopRefresh)
+thisExp.addData('end_text2.started', end_text2.tStartRefresh)
+thisExp.addData('end_text2.stopped', end_text2.tStopRefresh)
 # check responses
 if end_resp.keys in ['', [], None]:  # No response was made
     end_resp.keys = None
