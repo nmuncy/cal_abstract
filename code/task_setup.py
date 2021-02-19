@@ -19,6 +19,7 @@ TODO randomize Fix/Cond assignment for each subject
 # %%
 import os
 import random
+import pathlib
 from random import randrange
 import pandas as pd
 
@@ -64,7 +65,11 @@ def main():
 
     # set paths
     parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
     stim_dir = os.path.join(parent_dir, "stimuli")
+    stim_p = pathlib.Path(stim_dir)
+    stim_rel = pathlib.Path(*stim_p.parts[5:])
+
     block_dir = os.path.join(parent_dir, "blocks")
     if not os.path.exists(block_dir):
         os.makedirs(block_dir)
@@ -78,7 +83,7 @@ def main():
     Dataframe will not start with conditional trial.
     """
     for block in stim_dict:
-        # block = "Block3"
+        # block = "Block1"
 
         # randomly assign fixed mapping
         coin_toss = randrange(2)
@@ -91,7 +96,7 @@ def main():
             "Fix1": [
                 [corr_A] * block_length,
                 [
-                    os.path.join(stim_dir, stim_dict[block]["Fix1"], x)
+                    os.path.join(stim_rel, stim_dict[block]["Fix1"], x)
                     for x in random.sample(
                         os.listdir(os.path.join(stim_dir, stim_dict[block]["Fix1"])),
                         block_length,
@@ -101,7 +106,7 @@ def main():
             "Fix2": [
                 [corr_B] * block_length,
                 [
-                    os.path.join(stim_dir, stim_dict[block]["Fix2"], x)
+                    os.path.join(stim_rel, stim_dict[block]["Fix2"], x)
                     for x in random.sample(
                         os.listdir(os.path.join(stim_dir, stim_dict[block]["Fix2"])),
                         block_length,
@@ -111,7 +116,7 @@ def main():
             "Cond": [
                 ["Cond"] * block_length,
                 [
-                    os.path.join(stim_dir, stim_dict[block]["Cond"], x)
+                    os.path.join(stim_rel, stim_dict[block]["Cond"], x)
                     for x in random.sample(
                         os.listdir(os.path.join(stim_dir, stim_dict[block]["Cond"])),
                         block_length,
