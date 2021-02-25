@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2020.2.4),
-    on Fri Feb 19 08:49:54 2021
+    on Thu Feb 25 15:11:39 2021
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -181,6 +181,24 @@ break_text1 = visual.TextStim(win=win, name='break_text1',
     depth=0.0);
 break_resp1 = keyboard.Keyboard()
 
+# Initialize components for Routine "InstructReminder"
+InstructReminderClock = core.Clock()
+intructRemind_text1 = visual.TextStim(win=win, name='intructRemind_text1',
+    text='Reminder:\n\nSome stimuli always have a correct “Left” response, and others always have a correct “Right” response.\n\nFor others, the correct response is opposite from the previous stimulus.',
+    font='Arial',
+    pos=(0, 0.2), height=0.05, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=0.0);
+instructRemind_text2 = visual.TextStim(win=win, name='instructRemind_text2',
+    text='Press “enter” or “return” to continue.',
+    font='Arial',
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=-1.0);
+instructRemind_resp1 = keyboard.Keyboard()
+
 # Initialize components for Routine "Start2"
 Start2Clock = core.Clock()
 start_text3 = visual.TextStim(win=win, name='start_text3',
@@ -238,6 +256,24 @@ break_text2 = visual.TextStim(win=win, name='break_text2',
     languageStyle='LTR',
     depth=0.0);
 break_resp2 = keyboard.Keyboard()
+
+# Initialize components for Routine "InstructReminder"
+InstructReminderClock = core.Clock()
+intructRemind_text1 = visual.TextStim(win=win, name='intructRemind_text1',
+    text='Reminder:\n\nSome stimuli always have a correct “Left” response, and others always have a correct “Right” response.\n\nFor others, the correct response is opposite from the previous stimulus.',
+    font='Arial',
+    pos=(0, 0.2), height=0.05, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=0.0);
+instructRemind_text2 = visual.TextStim(win=win, name='instructRemind_text2',
+    text='Press “enter” or “return” to continue.',
+    font='Arial',
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=-1.0);
+instructRemind_resp1 = keyboard.Keyboard()
 
 # Initialize components for Routine "Start3"
 Start3Clock = core.Clock()
@@ -979,6 +1015,113 @@ thisExp.nextEntry()
 # the Routine "Break1" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
+# ------Prepare to start Routine "InstructReminder"-------
+continueRoutine = True
+# update component parameters for each repeat
+instructRemind_resp1.keys = []
+instructRemind_resp1.rt = []
+_instructRemind_resp1_allKeys = []
+# keep track of which components have finished
+InstructReminderComponents = [intructRemind_text1, instructRemind_text2, instructRemind_resp1]
+for thisComponent in InstructReminderComponents:
+    thisComponent.tStart = None
+    thisComponent.tStop = None
+    thisComponent.tStartRefresh = None
+    thisComponent.tStopRefresh = None
+    if hasattr(thisComponent, 'status'):
+        thisComponent.status = NOT_STARTED
+# reset timers
+t = 0
+_timeToFirstFrame = win.getFutureFlipTime(clock="now")
+InstructReminderClock.reset(-_timeToFirstFrame)  # t0 is time of first possible flip
+frameN = -1
+
+# -------Run Routine "InstructReminder"-------
+while continueRoutine:
+    # get current time
+    t = InstructReminderClock.getTime()
+    tThisFlip = win.getFutureFlipTime(clock=InstructReminderClock)
+    tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+    # update/draw components on each frame
+    
+    # *intructRemind_text1* updates
+    if intructRemind_text1.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        intructRemind_text1.frameNStart = frameN  # exact frame index
+        intructRemind_text1.tStart = t  # local t and not account for scr refresh
+        intructRemind_text1.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(intructRemind_text1, 'tStartRefresh')  # time at next scr refresh
+        intructRemind_text1.setAutoDraw(True)
+    
+    # *instructRemind_text2* updates
+    if instructRemind_text2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        instructRemind_text2.frameNStart = frameN  # exact frame index
+        instructRemind_text2.tStart = t  # local t and not account for scr refresh
+        instructRemind_text2.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(instructRemind_text2, 'tStartRefresh')  # time at next scr refresh
+        instructRemind_text2.setAutoDraw(True)
+    
+    # *instructRemind_resp1* updates
+    waitOnFlip = False
+    if instructRemind_resp1.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        instructRemind_resp1.frameNStart = frameN  # exact frame index
+        instructRemind_resp1.tStart = t  # local t and not account for scr refresh
+        instructRemind_resp1.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(instructRemind_resp1, 'tStartRefresh')  # time at next scr refresh
+        instructRemind_resp1.status = STARTED
+        # keyboard checking is just starting
+        waitOnFlip = True
+        win.callOnFlip(instructRemind_resp1.clock.reset)  # t=0 on next screen flip
+        win.callOnFlip(instructRemind_resp1.clearEvents, eventType='keyboard')  # clear events on next screen flip
+    if instructRemind_resp1.status == STARTED and not waitOnFlip:
+        theseKeys = instructRemind_resp1.getKeys(keyList=['return'], waitRelease=False)
+        _instructRemind_resp1_allKeys.extend(theseKeys)
+        if len(_instructRemind_resp1_allKeys):
+            instructRemind_resp1.keys = _instructRemind_resp1_allKeys[-1].name  # just the last key pressed
+            instructRemind_resp1.rt = _instructRemind_resp1_allKeys[-1].rt
+            # a response ends the routine
+            continueRoutine = False
+    
+    # check for quit (typically the Esc key)
+    if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
+        core.quit()
+    
+    # check if all components have finished
+    if not continueRoutine:  # a component has requested a forced-end of Routine
+        break
+    continueRoutine = False  # will revert to True if at least one component still running
+    for thisComponent in InstructReminderComponents:
+        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+            continueRoutine = True
+            break  # at least one component has not yet finished
+    
+    # refresh the screen
+    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+        win.flip()
+
+# -------Ending Routine "InstructReminder"-------
+for thisComponent in InstructReminderComponents:
+    if hasattr(thisComponent, "setAutoDraw"):
+        thisComponent.setAutoDraw(False)
+thisExp.addData('intructRemind_text1.started', intructRemind_text1.tStartRefresh)
+thisExp.addData('intructRemind_text1.stopped', intructRemind_text1.tStopRefresh)
+thisExp.addData('instructRemind_text2.started', instructRemind_text2.tStartRefresh)
+thisExp.addData('instructRemind_text2.stopped', instructRemind_text2.tStopRefresh)
+# check responses
+if instructRemind_resp1.keys in ['', [], None]:  # No response was made
+    instructRemind_resp1.keys = None
+thisExp.addData('instructRemind_resp1.keys',instructRemind_resp1.keys)
+if instructRemind_resp1.keys != None:  # we had a response
+    thisExp.addData('instructRemind_resp1.rt', instructRemind_resp1.rt)
+thisExp.addData('instructRemind_resp1.started', instructRemind_resp1.tStartRefresh)
+thisExp.addData('instructRemind_resp1.stopped', instructRemind_resp1.tStopRefresh)
+thisExp.nextEntry()
+# the Routine "InstructReminder" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
+
 # ------Prepare to start Routine "Start2"-------
 continueRoutine = True
 # update component parameters for each repeat
@@ -1400,6 +1543,113 @@ thisExp.addData('break_resp2.started', break_resp2.tStartRefresh)
 thisExp.addData('break_resp2.stopped', break_resp2.tStopRefresh)
 thisExp.nextEntry()
 # the Routine "Break2" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
+
+# ------Prepare to start Routine "InstructReminder"-------
+continueRoutine = True
+# update component parameters for each repeat
+instructRemind_resp1.keys = []
+instructRemind_resp1.rt = []
+_instructRemind_resp1_allKeys = []
+# keep track of which components have finished
+InstructReminderComponents = [intructRemind_text1, instructRemind_text2, instructRemind_resp1]
+for thisComponent in InstructReminderComponents:
+    thisComponent.tStart = None
+    thisComponent.tStop = None
+    thisComponent.tStartRefresh = None
+    thisComponent.tStopRefresh = None
+    if hasattr(thisComponent, 'status'):
+        thisComponent.status = NOT_STARTED
+# reset timers
+t = 0
+_timeToFirstFrame = win.getFutureFlipTime(clock="now")
+InstructReminderClock.reset(-_timeToFirstFrame)  # t0 is time of first possible flip
+frameN = -1
+
+# -------Run Routine "InstructReminder"-------
+while continueRoutine:
+    # get current time
+    t = InstructReminderClock.getTime()
+    tThisFlip = win.getFutureFlipTime(clock=InstructReminderClock)
+    tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+    # update/draw components on each frame
+    
+    # *intructRemind_text1* updates
+    if intructRemind_text1.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        intructRemind_text1.frameNStart = frameN  # exact frame index
+        intructRemind_text1.tStart = t  # local t and not account for scr refresh
+        intructRemind_text1.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(intructRemind_text1, 'tStartRefresh')  # time at next scr refresh
+        intructRemind_text1.setAutoDraw(True)
+    
+    # *instructRemind_text2* updates
+    if instructRemind_text2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        instructRemind_text2.frameNStart = frameN  # exact frame index
+        instructRemind_text2.tStart = t  # local t and not account for scr refresh
+        instructRemind_text2.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(instructRemind_text2, 'tStartRefresh')  # time at next scr refresh
+        instructRemind_text2.setAutoDraw(True)
+    
+    # *instructRemind_resp1* updates
+    waitOnFlip = False
+    if instructRemind_resp1.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        instructRemind_resp1.frameNStart = frameN  # exact frame index
+        instructRemind_resp1.tStart = t  # local t and not account for scr refresh
+        instructRemind_resp1.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(instructRemind_resp1, 'tStartRefresh')  # time at next scr refresh
+        instructRemind_resp1.status = STARTED
+        # keyboard checking is just starting
+        waitOnFlip = True
+        win.callOnFlip(instructRemind_resp1.clock.reset)  # t=0 on next screen flip
+        win.callOnFlip(instructRemind_resp1.clearEvents, eventType='keyboard')  # clear events on next screen flip
+    if instructRemind_resp1.status == STARTED and not waitOnFlip:
+        theseKeys = instructRemind_resp1.getKeys(keyList=['return'], waitRelease=False)
+        _instructRemind_resp1_allKeys.extend(theseKeys)
+        if len(_instructRemind_resp1_allKeys):
+            instructRemind_resp1.keys = _instructRemind_resp1_allKeys[-1].name  # just the last key pressed
+            instructRemind_resp1.rt = _instructRemind_resp1_allKeys[-1].rt
+            # a response ends the routine
+            continueRoutine = False
+    
+    # check for quit (typically the Esc key)
+    if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
+        core.quit()
+    
+    # check if all components have finished
+    if not continueRoutine:  # a component has requested a forced-end of Routine
+        break
+    continueRoutine = False  # will revert to True if at least one component still running
+    for thisComponent in InstructReminderComponents:
+        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+            continueRoutine = True
+            break  # at least one component has not yet finished
+    
+    # refresh the screen
+    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+        win.flip()
+
+# -------Ending Routine "InstructReminder"-------
+for thisComponent in InstructReminderComponents:
+    if hasattr(thisComponent, "setAutoDraw"):
+        thisComponent.setAutoDraw(False)
+thisExp.addData('intructRemind_text1.started', intructRemind_text1.tStartRefresh)
+thisExp.addData('intructRemind_text1.stopped', intructRemind_text1.tStopRefresh)
+thisExp.addData('instructRemind_text2.started', instructRemind_text2.tStartRefresh)
+thisExp.addData('instructRemind_text2.stopped', instructRemind_text2.tStopRefresh)
+# check responses
+if instructRemind_resp1.keys in ['', [], None]:  # No response was made
+    instructRemind_resp1.keys = None
+thisExp.addData('instructRemind_resp1.keys',instructRemind_resp1.keys)
+if instructRemind_resp1.keys != None:  # we had a response
+    thisExp.addData('instructRemind_resp1.rt', instructRemind_resp1.rt)
+thisExp.addData('instructRemind_resp1.started', instructRemind_resp1.tStartRefresh)
+thisExp.addData('instructRemind_resp1.stopped', instructRemind_resp1.tStopRefresh)
+thisExp.nextEntry()
+# the Routine "InstructReminder" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
 # ------Prepare to start Routine "Start3"-------

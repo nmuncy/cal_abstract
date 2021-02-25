@@ -1,31 +1,34 @@
 """
 Notes:
 
-This script will make csv files for each block.
+    1) This script will make csv files for each block.
+    2) Orients from block_length (number of trials per category),
+        and stim_dict.
+    3) Assumes dimensional stimuli are called "foo_low" and "foo_high"
+        for mapping assignment.
+    4) Assumes stimuli are found in ../Stimuli/foo, will write to ../blocks/BlockX.csv
 
-Orients from block_length (number of trials per category),
-    and stim_dict.
+Updates:
+    1) Dropped "Dim" from task
+    2) randomized category assignment
+        writes blocks for e/subj to ../blocks/sub-*/BlockX.csv
+        receives single subj arg
+        removed "dim" syntax (for syntax - v0.1)
 
-Assumes dimensional stimuli are called "foo_low" and "foo_high"
-    for mapping assignment.
+TODO
+    1) update to receive list of subj?
 
-Assumes stimuli are found in ../Stimuli/foo, will write to ../blocks/BlockX.csv
-
-Update: dropped "Dim" from task
-
-TODO randomize Fix/Cond assignment for each subject
-    only for running locally in psychopy
+Usage: python task_setup.py 1
 """
-# %%
 import os
+import sys
 import random
 import pathlib
 from random import randrange
 import pandas as pd
 
 
-# %%
-def main():
+def main(subj):
     """
     Set up
 
@@ -36,32 +39,6 @@ def main():
         stimuli will be used for fixed mapping in block1.
         Also, stimuli will be located in stim_dir/School
     """
-    block_length = 50
-
-    # cat_list = [
-    #     "Dangerous",
-    #     "Healthy",
-    #     "Old",
-    #     "Sad",
-    #     "School",
-    #     "Small",
-    #     "Smell",
-    #     "Soft",
-    #     "Wealth",
-    # ]
-    # cat_rand = random.sample(cat_list, len(cat_list))
-
-    # stim_dict = {
-    #     "Block1": {"Fix1": cat_rand[0], "Fix2": cat_rand[1], "Cond": cat_rand[2]},
-    #     "Block2": {"Fix1": cat_rand[3], "Fix2": cat_rand[4], "Cond": cat_rand[5]},
-    #     "Block3": {"Fix1": cat_rand[6], "Fix2": cat_rand[7], "Cond": cat_rand[8]},
-    # }
-
-    stim_dict = {
-        "Block1": {"Fix1": "School", "Fix2": "Dangerous", "Cond": "Small"},
-        "Block2": {"Fix1": "Old", "Fix2": "Healthy", "Cond": "Wealth"},
-        "Block3": {"Fix1": "Sad", "Fix2": "Soft", "Cond": "Smell"},
-    }
 
     # set paths
     parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -74,7 +51,6 @@ def main():
     if not os.path.exists(block_dir):
         os.makedirs(block_dir)
 
-    # %%
     """
     Make stim lists per block, for psychopy.
 
@@ -82,6 +58,32 @@ def main():
     Conditional mapping is based off preceding trial.
     Dataframe will not start with conditional trial.
     """
+
+    # set block length
+    block_length = 60
+
+    # dict of categories
+    cat_list = [
+        "Dangerous",
+        "Healthy",
+        "Old",
+        "Sad",
+        "School",
+        "Small",
+        "Smell",
+        "Soft",
+        "Wealth",
+    ]
+
+    # make random stim_dict
+    cat_rand = random.sample(cat_list, len(cat_list))
+    stim_dict = {
+        "Block1": {"Fix1": cat_rand[0], "Fix2": cat_rand[1], "Cond": cat_rand[2]},
+        "Block2": {"Fix1": cat_rand[3], "Fix2": cat_rand[4], "Cond": cat_rand[5]},
+        "Block3": {"Fix1": cat_rand[6], "Fix2": cat_rand[7], "Cond": cat_rand[8]},
+    }
+
+    # make individual blocks
     for block in stim_dict:
         # block = "Block1"
 
@@ -125,26 +127,6 @@ def main():
             ],
         }
 
-        # # Make dim list
-        # dim_list = [
-        #     os.path.join(stim_dir, stim_dict[block]["Dim"], x)
-        #     for x in random.sample(
-        #         os.listdir(os.path.join(stim_dir, stim_dict[block]["Dim"])),
-        #         block_length,
-        #     )
-        # ]
-
-        # # set dim corr off of coin_toss
-        # #   just reuse corr_A/B
-        # dim_corr = []
-        # for stim in dim_list:
-        #     h_corr = corr_A if "_Low." in stim else corr_B
-        #     dim_corr.append(h_corr)
-
-        # # add dim to block_dict
-        # block_dict["Dim"] = [dim_corr, dim_list]
-
-        # %%
         # make master_dict for pandas df, randomize df,
         #   don't start with cond type
         master_dict = {f"{block}Type": [], f"{block}Stim": [], f"{block}Corr": []}
@@ -167,12 +149,13 @@ def main():
                     "left" if old_val == "right" else "right"
                 )
 
-        # %%
         # write df_rand to csv
-        df_rand.to_csv(os.path.join(block_dir, f"{block}.csv"), index=False)
+        subj_dir = os.path.join(block_dir, f"sub-{subj}")
+        if not os.path.exists(subj_dir):
+            os.makedirs(subj_dir)
+        df_rand.to_csv(os.path.join(subj_dir, f"{block}.csv"), index=False)
 
 
 if __name__ == "__main__":
-    main()
-
-# %%
+    h_subj = sys.argv[1]
+    main(h_subj)

@@ -3,7 +3,6 @@
 parentDir=~/Projects/cal_abstract
 codeDir=${parentDir}/code
 stimDir=${parentDir}/stimuli
-# blockDir=${parentDir}/blocks
 
 # get stimuli
 source ${codeDir}/job_stimGet.sh
@@ -24,7 +23,3 @@ for cat in ${catList[@]}; do
     done
     cd $stimDir
 done
-
-# # make blocks
-# rm -r $blockDir
-# python ${codeDir}/task_setup.py

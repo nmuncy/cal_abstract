@@ -41,7 +41,7 @@ def main():
     main_work_dir = sys.argv[1]
     main_image_list = [x for x in os.listdir(main_work_dir)]
     main_image_list.sort()
-    main_base_dim = 600
+    main_base_dim = 800
 
     func_job(main_work_dir, main_image_list, main_base_dim)
 
