@@ -22,11 +22,16 @@ for cat in ${catList[@]}; do
 	done
 
 	# number
+	#	deal with overwriting
 	imageList=(`ls`)
 	for img in ${!imageList[@]}; do
 		file=${imageList[$img]}
 		suff=${file##*.}
-		mv $file ${img}.$suff
+		mv $file tmp_${img}.$suff
+	done
+
+	for str in tmp*; do
+		mv $str "${str/tmp_/}"
 	done
 
 	# convert png to jpg
