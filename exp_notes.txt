@@ -1,0 +1,8 @@
+Updates to Experiment.py 2/25/21
+
+	1) Sex drop-down, age (lines 78, 77)
+	2) Subj data dir (lines 89-99)
+	3) Relative path (line 107)
+	4) Lower block response prompt (lines 293, 434, 575)
+	5) Subj-specific block files (lines 1056, 1662, 2268)
+	6) RA input prompt (lines 43-62)

@@ -18,7 +18,7 @@ Updates:
 TODO
     1) update to receive list of subj?
 
-Usage: python task_setup.py 1
+Usage: python job_taskSetup.py 1
 """
 import os
 import sys
