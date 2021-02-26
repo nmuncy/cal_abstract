@@ -8,7 +8,6 @@ library("dplyr")
 library("tidyr")
 
 # libs for logit
-library("car")
 library("lme4")
 
 
@@ -265,17 +264,17 @@ df_plot <- func_doLogit()
 ggplot(df_plot[which(df_plot$Block == "Block1"),]) +
   geom_line(aes(x=Trial, y=Prob, colour = Type, group = Type)) +
   geom_point(mapping = aes(x=Trial, y=Prob, color=Type),size=0.3) +
-  ggtitle("Learning Curve: Block1")
+  ggtitle("Learning Curves for Block1 Trial Types")
 
 ggplot(df_plot[which(df_plot$Block == "Block2"),]) +
   geom_line(aes(x=Trial, y=Prob, colour = Type, group = Type)) +
   geom_point(mapping = aes(x=Trial, y=Prob, color=Type),size=0.3) +
-  ggtitle("Learning Curve: Block2")
+  ggtitle("Learning Curves for Block2 Trial Types")
 
 ggplot(df_plot[which(df_plot$Block == "Block3"),]) +
   geom_line(aes(x=Trial, y=Prob, colour = Type, group = Type)) +
   geom_point(mapping = aes(x=Trial, y=Prob, color=Type),size=0.3) +
-  ggtitle("Learning Curve: Block3")
+  ggtitle("Learning Curves for Block3 Trial Types")
 
 
 
@@ -347,7 +346,7 @@ df_plot <- func_auc()
 # plot
 ee <- ggplot(df_plot, aes(x = Block, y = AUC))
 ee2 <- ee+geom_boxplot(aes(fill=Type))
-ee2 + facet_wrap(~Type)
+ee2 + facet_wrap(~Type) + ggtitle("Boxplots of AUCs")
 
 
 
@@ -368,7 +367,8 @@ roc_b1 <- roc(df_type_b1$Succ, df_type_b1$TrialTypeInt)
 roc_b2 <- roc(df_type_b2$Succ, df_type_b2$TrialTypeInt)
 roc_b3 <- roc(df_type_b3$Succ, df_type_b3$TrialTypeInt)
 
-e <- ggroc(list(block1=roc_b1, block2=roc_b2, block3=roc_b3)) + ggtitle(paste0("ROC: ",type))
+e <- ggroc(list(block1=roc_b1, block2=roc_b2, block3=roc_b3)) + 
+  ggtitle(paste0("ROC Curves for Type: ",type))
 e1 <- e + xlab("FPR") + ylab("TPR")
 e1
 
@@ -382,7 +382,8 @@ roc_b1 <- roc(df_type_b1$Succ, df_type_b1$TrialTypeInt)
 roc_b2 <- roc(df_type_b2$Succ, df_type_b2$TrialTypeInt)
 roc_b3 <- roc(df_type_b3$Succ, df_type_b3$TrialTypeInt)
 
-e <- ggroc(list(block1=roc_b1, block2=roc_b2, block3=roc_b3)) + ggtitle(paste0("ROC: ",type))
+e <- ggroc(list(block1=roc_b1, block2=roc_b2, block3=roc_b3)) + 
+  ggtitle(paste0("ROC Curves for Type: ",type))
 e1 <- e + xlab("FPR") + ylab("TPR")
 e1
 
@@ -396,7 +397,8 @@ roc_b1 <- roc(df_type_b1$Succ, df_type_b1$TrialTypeInt)
 roc_b2 <- roc(df_type_b2$Succ, df_type_b2$TrialTypeInt)
 roc_b3 <- roc(df_type_b3$Succ, df_type_b3$TrialTypeInt)
 
-e <- ggroc(list(block1=roc_b1, block2=roc_b2, block3=roc_b3)) + ggtitle(paste0("ROC: ",type))
+e <- ggroc(list(block1=roc_b1, block2=roc_b2, block3=roc_b3)) + 
+  ggtitle(paste0("ROC Curves for Type: ",type))
 e1 <- e + xlab("FPR") + ylab("TPR")
 e1
 
@@ -411,6 +413,9 @@ e1
 #   by subject
 #
 # Writes analyses/Table_d-prime.csv
+#
+# TODO test for stat differences between
+#   blocks, add sig stars to graph
 
 func_dprime <- function(){
   df_all <- read.csv(paste0(outDir, "Master_dataframe.csv"))
@@ -476,7 +481,7 @@ df_plot <- func_dprime()
 
 ee <- ggplot(df_plot, aes(x = Block, y = dp))
 ee2 <- ee+geom_boxplot(aes(fill=dp))
-ee2 + ggtitle("D-prime Boxplots for Fixed Mappings") + ylab("d-prime")
+ee2 + ggtitle("Boxplots of D-prime Scores for Fixed Trials") + ylab("d'")
 
 
 
