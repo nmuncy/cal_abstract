@@ -169,6 +169,7 @@ func_makeDF()
 # Write analyses/Stats_logit.txt
 #
 # TODO: update to write out graphs to analyses
+#   does df_pred$Preds <- plogis(predict(fit, newdata=df_pred)) need type=response?
 
 func_doLogit <- function(){
   
@@ -206,7 +207,8 @@ func_doLogit <- function(){
 
   # make prediction df for plots
   df_pred <- as.data.frame(df_all[,c(1:3,11)])
-  df_pred$Preds <- plogis(predict(fit, newdata=df_pred))
+  # df_pred$Preds <- plogis(predict(fit, newdata=df_pred))
+  df_pred$Preds <- plogis(predict(fit, newdata=df_pred, type="response"))
   
   # get lists
   numSubj <- length(unique(df_pred$Subj))
