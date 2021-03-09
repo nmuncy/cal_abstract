@@ -43,18 +43,18 @@ from psychopy.hardware import keyboard
 """
 RAs!
 
-Please set the variable subj_num below to the integer
+Please set the variable subj_num below to the string
     of the participant.
 
 This number is the same as the Participant number
     that will be entered on the splash screen
 
-Example: subj_num = 1
+Example: subj_num = "1"
     for sub-1
 """
 
 
-subj_num = 2
+subj_num = "00"
 
 
 """
@@ -1057,6 +1057,8 @@ Block1_loop = data.TrialHandler(
     seed=None,
     name="Block1_loop",
 )
+
+
 thisExp.addLoop(Block1_loop)  # add the loop to the experiment
 thisBlock1_loop = Block1_loop.trialList[
     0
@@ -1065,6 +1067,8 @@ thisBlock1_loop = Block1_loop.trialList[
 if thisBlock1_loop != None:
     for paramName in thisBlock1_loop:
         exec("{} = thisBlock1_loop[paramName]".format(paramName))
+
+
 
 for thisBlock1_loop in Block1_loop:
     currentLoop = Block1_loop
