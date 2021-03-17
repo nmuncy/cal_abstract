@@ -13,10 +13,10 @@ library("lme4")
 
 # orienting vars
 parentDir <- "~/Projects/cal_abstract/"
-dataDir <- paste0(parentDir, "pilot_data/")
+dataDir <- paste0(parentDir, "data/")
 outDir <- paste0(parentDir, "analyses/")
 
-
+subjList <- c("sub-11","sub-12","sub-21","sub-41","sub-42")
 
 ### --- Step 1: Make data frame
 #
@@ -25,22 +25,23 @@ outDir <- paste0(parentDir, "analyses/")
 #
 # Writes analyses/Master_dataframe.csv
 
-func_makeDF <- function(){
+func_makeDF <- function(subjList){
   
   # start master df
   df_master <- as.data.frame(matrix(NA, nrow=1, ncol=11))
   colnames(df_master) <- c("Subj","Block","Type","Stim","Corr","Trial","Resp","RT","Succ","TrialType","TrialTypeInt")
   
   # get list of participant data
-  dataList <- list.files(dataDir, pattern = "*.csv")
+  # dataList <- list.files(dataDir, pattern = "*.csv")
   
   # extract relevant data for each participant,
   #   write to master
-  for(dataFile in dataList){
+  for(subj in subjList){
     
     # dataFile <- dataList[1]
-    df_raw <- read.delim(paste0(dataDir, dataFile), header = T, sep = ",")
-    subj <- gsub("_.*", "", dataFile)
+    # df_raw <- read.delim(paste0(dataDir, dataFile), header = T, sep = ",")
+    df_raw <- read.csv(Sys.glob(file.path(paste0(dataDir, "/", subj), "*csv")))
+    # subj <- gsub("_.*", "", dataFile)
     
     # Get relevant block1 info
     df_block1 <- cbind(
@@ -155,7 +156,7 @@ func_makeDF <- function(){
   writeOut <- paste0(outDir, "Master_dataframe.csv")
   write.csv(df_master, file=writeOut, quote=F, row.names = F)
 }
-func_makeDF()
+func_makeDF(subjList)
 
 
 
