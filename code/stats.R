@@ -7,8 +7,11 @@ library("profileR")
 library("dplyr")
 library("tidyr")
 
+
 # libs for logit
 library("lme4")
+
+library("ez")
 
 
 # orienting vars
@@ -343,6 +346,7 @@ func_auc <- function(){
   writeOut <- paste0(outDir, "Table_AUC.csv")
   write.csv(df_auc, file=writeOut, quote=F, row.names = F)
   return(df_auc)
+  
 }
 df_plot <- func_auc()
 
@@ -358,7 +362,11 @@ ee2 + facet_wrap(~Type) + ggtitle("Boxplots of AUCs")
 # Aggregate ROC values across
 #   subjects, plot out
 
-df_all <- read.csv(paste0(outDir, "Master_dataframe.csv"))
+# df_all <- read.csv(paste0(outDir, "Master_dataframe.csv"))
+df_all <- read.csv(paste0(outDir, "pilot1/Master_dataframe.csv"))
+
+df_out <- as.data.frame(matrix(NA,nrow=9, ncol=4))
+colnames(df_out) <- c("Comparison", "Test.Stat", "DF", "P-value")
 
 # Fix1
 type <- "Fix1"
@@ -375,6 +383,15 @@ e <- ggroc(list(block1=roc_b1, block2=roc_b2, block3=roc_b3)) +
 e1 <- e + xlab("FPR") + ylab("TPR")
 e1
 
+b1b2 <- roc.test(roc_b1, roc_b2)
+b1b3 <- roc.test(roc_b1, roc_b3)
+b2b3 <- roc.test(roc_b2, roc_b3)
+
+df_out[1,] <- c("F1:B1.B2", round(b1b2$statistic,2), round(b1b2$parameter,2), round(b1b2$p.value[1], 3))
+df_out[2,] <- c("F1:B1.B3", round(b1b3$statistic, 2), round(b1b3$parameter, 2), round(b1b3$p.value[1], 2))
+df_out[3,] <- c("F1:B2.B3", round(b2b3$statistic, 2), round(b2b3$parameter, 2), round(b2b3$p.value[1], 2))
+
+
 # Fix2
 type <- "Fix2"
 df_type_b1 <- df_all[which(df_all$Block == "Block1" & df_all$Type == type),]
@@ -390,6 +407,15 @@ e <- ggroc(list(block1=roc_b1, block2=roc_b2, block3=roc_b3)) +
 e1 <- e + xlab("FPR") + ylab("TPR")
 e1
 
+b1b2 <- roc.test(roc_b1, roc_b2)
+b1b3 <- roc.test(roc_b1, roc_b3)
+b2b3 <- roc.test(roc_b2, roc_b3)
+
+df_out[4,] <- c("F2:B1.B2", round(b1b2$statistic,2), round(b1b2$parameter,2), round(b1b2$p.value[1], 3))
+df_out[5,] <- c("F2:B1.B3", round(b1b3$statistic, 2), round(b1b3$parameter, 2), round(b1b3$p.value[1], 2))
+df_out[6,] <- c("F2:B2.B3", round(b2b3$statistic, 2), round(b2b3$parameter, 2), round(b2b3$p.value[1], 2))
+
+
 # Cond
 type <- "Cond"
 df_type_b1 <- df_all[which(df_all$Block == "Block1" & df_all$Type == type),]
@@ -404,6 +430,17 @@ e <- ggroc(list(block1=roc_b1, block2=roc_b2, block3=roc_b3)) +
   ggtitle(paste0("ROC Curves for Type: ",type))
 e1 <- e + xlab("FPR") + ylab("TPR")
 e1
+
+b1b2 <- roc.test(roc_b1, roc_b2)
+b1b3 <- roc.test(roc_b1, roc_b3)
+b2b3 <- roc.test(roc_b2, roc_b3)
+
+df_out[7,] <- c("C:B1.B2", round(b1b2$statistic,2), round(b1b2$parameter,2), round(b1b2$p.value[1], 3))
+df_out[8,] <- c("C:B1.B3", round(b1b3$statistic, 2), round(b1b3$parameter, 2), round(b1b3$p.value[1], 2))
+df_out[9,] <- c("C:B2.B3", round(b2b3$statistic, 2), round(b2b3$parameter, 2), round(b2b3$p.value[1], 2))
+
+# write.csv(df_out, file=paste0(outDir, "Table_ROC_comp.csv"), row.names = F)
+write.csv(df_out, file=paste0(outDir, "pilot1/Table_ROC_comp.csv"), row.names = F)
 
 
 
@@ -421,7 +458,9 @@ e1
 #   blocks, add sig stars to graph
 
 func_dprime <- function(){
-  df_all <- read.csv(paste0(outDir, "Master_dataframe.csv"))
+  
+  # df_all <- read.csv(paste0(outDir, "Master_dataframe.csv"))
+  df_all <- read.csv(paste0(outDir, "pilot1/Master_dataframe.csv"))
   
   # get hit rates for each block/subj
   blockList <- unique(df_all$Block)
@@ -479,6 +518,7 @@ func_dprime <- function(){
   writeOut <- paste0(outDir, "Table_d-prime.csv")
   write.csv(df_dprime, file=writeOut, quote=F, row.names = F)
   return(df_dprime)
+  
 }
 df_plot <- func_dprime()
 
@@ -487,7 +527,22 @@ ee2 <- ee+geom_boxplot(aes(fill=dp))
 ee2 + ggtitle("Boxplots of D-prime Scores for Fixed Trials") + ylab("d'")
 
 
+# test against zero
+df_out <- as.data.frame(matrix(NA, nrow=3, ncol = 4))
+colnames(df_out) <- c("Block", "T-value", "DF", "P-value")
 
+t1 <- t.test(df_plot[which(df_plot$Block == "Block1"),]$dp, alternative = "greater", paired = F)
+t2 <- t.test(df_plot[which(df_plot$Block == "Block2"),]$dp, alternative = "greater", paired = F)
+t3 <- t.test(df_plot[which(df_plot$Block == "Block3"),]$dp, alternative = "greater", paired = F)
+
+df_out[1,] <- c(1, round(t1$statistic, 2), t1$parameter, round(t1$p.value, 3))
+df_out[2,] <- c(2, round(t2$statistic, 2), t2$parameter, round(t2$p.value, 3))
+df_out[3,] <- c(3, round(t3$statistic, 2), t3$parameter, round(t3$p.value, 3))
+
+write.csv(df_out, file = paste0(outDir, "pilot1/Table_dprime_stats.csv"), row.names = F)
+
+# test between
+t_an <- ezANOVA(df_plot, dp, wid=Subj, within = Block, type = 3)
 
 
 
