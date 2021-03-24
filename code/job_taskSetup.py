@@ -24,7 +24,6 @@ import os
 import sys
 import random
 import pathlib
-from random import shuffle
 from random import randrange
 import pandas as pd
 import itertools
@@ -44,8 +43,12 @@ def main(subj):
     if not os.path.exists(block_dir):
         os.makedirs(block_dir)
 
-    # set block length
+    # set block length, trial lists
     block_length = 60
+
+    map_options = ["+", "^", "~"]
+    type_options = ["Fix1", "Fix2", "Fix3"]
+    psychopy_options = ["left", "down", "right"]
 
     # dict of categories
     cat_list = [
@@ -63,9 +66,21 @@ def main(subj):
     # make random stim_dict
     cat_rand = random.sample(cat_list, len(cat_list))
     stim_dict = {
-        "Block1": {"Fix1": cat_rand[0], "Fix2": cat_rand[1], "Fix3": cat_rand[2]},
-        "Block2": {"Fix1": cat_rand[3], "Fix2": cat_rand[4], "Fix3": cat_rand[5]},
-        "Block3": {"Fix1": cat_rand[6], "Fix2": cat_rand[7], "Fix3": cat_rand[8]},
+        "Block1": {
+            type_options[0]: cat_rand[0],
+            type_options[1]: cat_rand[1],
+            type_options[2]: cat_rand[2],
+        },
+        "Block2": {
+            type_options[0]: cat_rand[3],
+            type_options[1]: cat_rand[4],
+            type_options[2]: cat_rand[5],
+        },
+        "Block3": {
+            type_options[0]: cat_rand[6],
+            type_options[1]: cat_rand[7],
+            type_options[2]: cat_rand[8],
+        },
     }
 
     # %%
@@ -75,9 +90,6 @@ def main(subj):
 
         # make all permutations of map/type,
         #   select one at random for map_dict
-        map_options = ["+", "^", "~"]
-        type_options = ["Fix1", "Fix2", "Fix3"]
-
         all_comb = []
         h_permut = itertools.permutations(type_options, len(map_options))
         for comb in h_permut:
@@ -106,41 +118,39 @@ def main(subj):
 
         [stimuli] contains path to stim
         """
-        block_dict = {
-            "Fix1": [
-                [map_dict["Fix1"]] * block_length,
+        block_dict = {}
+        for h_type in type_options:
+            block_dict[h_type] = (
+                [map_dict[h_type]] * block_length,
                 [
-                    os.path.join(stim_rel, stim_dict[block]["Fix1"], x)
+                    os.path.join(stim_rel, stim_dict[block][h_type], x)
                     for x in random.sample(
-                        os.listdir(os.path.join(stim_dir, stim_dict[block]["Fix1"])),
+                        os.listdir(os.path.join(stim_dir, stim_dict[block][h_type])),
                         block_length,
                     )
                 ],
                 random.sample(resp_list, len(resp_list)),
-            ],
-            "Fix2": [
-                [map_dict["Fix2"]] * block_length,
-                [
-                    os.path.join(stim_rel, stim_dict[block]["Fix2"], x)
-                    for x in random.sample(
-                        os.listdir(os.path.join(stim_dir, stim_dict[block]["Fix2"])),
-                        block_length,
-                    )
-                ],
-                random.sample(resp_list, len(resp_list)),
-            ],
-            "Fix3": [
-                [map_dict["Fix3"]] * block_length,
-                [
-                    os.path.join(stim_rel, stim_dict[block]["Fix3"], x)
-                    for x in random.sample(
-                        os.listdir(os.path.join(stim_dir, stim_dict[block]["Fix3"])),
-                        block_length,
-                    )
-                ],
-                random.sample(resp_list, len(resp_list)),
-            ],
-        }
+            )
+
+        # %%
+        # determine correct psychopy response,
+        #   add new list. Make final_dict
+        #   to get around block_dict tuple.
+        final_dict = {}
+        for key in block_dict:
+
+            alpha_corr = []
+            for ind, value in enumerate(block_dict[key][0]):
+                h_corr = block_dict[key][0][ind]
+                h_alpha = psychopy_options[block_dict[key][2][ind].index(h_corr)]
+                alpha_corr.append(h_alpha)
+
+            final_dict[key] = [
+                block_dict[key][0],
+                block_dict[key][1],
+                block_dict[key][2],
+                alpha_corr,
+            ]
 
         # %%
         # make master_dict for pandas df,
@@ -152,15 +162,17 @@ def main(subj):
             f"{block}RespL": [],
             f"{block}RespM": [],
             f"{block}RespR": [],
+            f"{block}CorrAlpha": [],
         }
-        for key in block_dict.keys():
-            for ind in range(0, block_length):
+        for key in final_dict.keys():
+            for ind, value in enumerate(final_dict[key][0]):
                 master_dict[f"{block}Type"].append(key)
-                master_dict[f"{block}Stim"].append(block_dict[key][1][ind])
-                master_dict[f"{block}Corr"].append(block_dict[key][0][ind])
-                master_dict[f"{block}RespL"].append(block_dict[key][2][ind][0])
-                master_dict[f"{block}RespM"].append(block_dict[key][2][ind][1])
-                master_dict[f"{block}RespR"].append(block_dict[key][2][ind][2])
+                master_dict[f"{block}Stim"].append(final_dict[key][1][ind])
+                master_dict[f"{block}Corr"].append(final_dict[key][0][ind])
+                master_dict[f"{block}RespL"].append(final_dict[key][2][ind][0])
+                master_dict[f"{block}RespM"].append(final_dict[key][2][ind][1])
+                master_dict[f"{block}RespR"].append(final_dict[key][2][ind][2])
+                master_dict[f"{block}CorrAlpha"].append(final_dict[key][3][ind])
 
         # make df, randomized df
         df = pd.DataFrame.from_dict(master_dict)
@@ -168,6 +180,7 @@ def main(subj):
 
         # %%
         # make sure same type not presented > 4 times in a row
+        #   in the hackiest way possible
         status = True
         while status:
 
