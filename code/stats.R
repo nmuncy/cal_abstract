@@ -520,20 +520,24 @@ func_dprime <- function(){
   return(df_dprime)
   
 }
-df_plot <- func_dprime()
+df_dprime <- func_dprime()
 
-ee <- ggplot(df_plot, aes(x = Block, y = dp))
+ee <- ggplot(df_dprime, aes(x = Block, y = dp))
 ee2 <- ee+geom_boxplot(aes(fill=dp))
 ee2 + ggtitle("Boxplots of D-prime Scores for Fixed Trials") + ylab("d'")
 
 
 # test against zero
+b1_mean <- round(mean(df_dprime[which(df_dprime$Block == "Block1"),]$dp),2)
+b2_mean <- round(mean(df_dprime[which(df_dprime$Block == "Block2"),]$dp),2)
+b3_mean <- round(mean(df_dprime[which(df_dprime$Block == "Block3"),]$dp),2)
+
 df_out <- as.data.frame(matrix(NA, nrow=3, ncol = 4))
 colnames(df_out) <- c("Block", "T-value", "DF", "P-value")
 
-t1 <- t.test(df_plot[which(df_plot$Block == "Block1"),]$dp, alternative = "greater", paired = F)
-t2 <- t.test(df_plot[which(df_plot$Block == "Block2"),]$dp, alternative = "greater", paired = F)
-t3 <- t.test(df_plot[which(df_plot$Block == "Block3"),]$dp, alternative = "greater", paired = F)
+t1 <- t.test(df_dprime[which(df_dprime$Block == "Block1"),]$dp, alternative = "greater", paired = F)
+t2 <- t.test(df_dprime[which(df_dprime$Block == "Block2"),]$dp, alternative = "greater", paired = F)
+t3 <- t.test(df_dprime[which(df_dprime$Block == "Block3"),]$dp, alternative = "greater", paired = F)
 
 df_out[1,] <- c(1, round(t1$statistic, 2), t1$parameter, round(t1$p.value, 3))
 df_out[2,] <- c(2, round(t2$statistic, 2), t2$parameter, round(t2$p.value, 3))
@@ -542,7 +546,8 @@ df_out[3,] <- c(3, round(t3$statistic, 2), t3$parameter, round(t3$p.value, 3))
 write.csv(df_out, file = paste0(outDir, "pilot1/Table_dprime_stats.csv"), row.names = F)
 
 # test between
-t_an <- ezANOVA(df_plot, dp, wid=Subj, within = Block, type = 3)
+t_an <- ezANOVA(df_dprime, dp, wid=Subj, within = Block, type = 3)
+
 
 
 

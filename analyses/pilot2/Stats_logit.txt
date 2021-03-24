@@ -1,4 +1,5 @@
-Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
  Family: binomial  ( logit )
 Formula: Succ ~ TrialTypeInt + Type * Block + (1 | Subj)
    Data: df_all
