@@ -1,8 +1,11 @@
-Updates to Experiment.py 2/25/21
+Changes to Experiment.py:
 
-	1) Sex drop-down, age (lines 78, 77)
-	2) Subj data dir (lines 89-99)
-	3) Relative path (line 107)
-	4) Lower block response prompt (lines 293, 434, 575)
-	5) Subj-specific block files (lines 1056, 1662, 2268)
-	6) RA input prompt (lines 43-62)
+updated expInfo (line 44)
+updated subj, subj_out, filename (lines 58-67)
+Added function make_blocks (lines 70-249)
+	changed parent_dir = _thisDir
+	changed subj_dir = os.path.join(block_dir, subj)
+Updated originPath (line 255)
+Updated Block1_loop trialList (1011)
+Updated Block2_loop trialList (1599)
+Updated Block3_loop trialList (2187)

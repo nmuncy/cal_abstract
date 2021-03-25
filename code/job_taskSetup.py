@@ -44,7 +44,7 @@ def main(subj):
         os.makedirs(block_dir)
 
     # set block length, trial lists
-    block_length = 5
+    exemplar_num = 60
 
     map_options = ["+", "^", "~"]
     type_options = ["Fix1", "Fix2", "Fix3"]
@@ -101,14 +101,14 @@ def main(subj):
 
         # make list of random response combinations
         resp_list = []
-        for ind in range(0, block_length):
+        for ind in range(0, exemplar_num):
             resp_list.append(random.sample(map_options, len(map_options)))
 
         # %%
         """
         Set up block dictionary
 
-        Make list of random stim of length = block_length
+        Make list of random stim of length = exemplar_num
         for each type (Fix1-3), attach with mapping and
         opetions in format:
             Fix1: [[mapping],[stimuli],[options]]
@@ -121,12 +121,12 @@ def main(subj):
         block_dict = {}
         for h_type in type_options:
             block_dict[h_type] = (
-                [map_dict[h_type]] * block_length,
+                [map_dict[h_type]] * exemplar_num,
                 [
                     os.path.join(stim_rel, stim_dict[block][h_type], x)
                     for x in random.sample(
                         os.listdir(os.path.join(stim_dir, stim_dict[block][h_type])),
-                        block_length,
+                        exemplar_num,
                     )
                 ],
                 random.sample(resp_list, len(resp_list)),
