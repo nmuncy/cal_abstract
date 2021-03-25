@@ -44,7 +44,7 @@ def main(subj):
         os.makedirs(block_dir)
 
     # set block length, trial lists
-    block_length = 60
+    block_length = 5
 
     map_options = ["+", "^", "~"]
     type_options = ["Fix1", "Fix2", "Fix3"]
